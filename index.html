@@ -9,138 +9,164 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+    }
+    nav {
+      background-color: #00274d;
+      border: none;
+    }
+    nav a {
+      color: #fff !important;
+    }
+    nav a:hover {
+      background-color: #69af6c;
+    }
+    .navbar-toggle {
+      border-color: transparent;
+    }
+    .navbar-collapse {
+      text-align: center;
+    }
+    h2 {
+      font-family: 'Oswald', sans-serif;
+      color: #69af6c;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #69af6c;
+      padding-bottom: 10px;
+    }
+    .container {
+      margin-top: 40px;
+    }
+    .sidebar {
+      background-color: #f7f7f7;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .sidebar h3 {
+      font-size: 28px;
+      color: #69af6c;
+      margin-top: 0;
+    }
+    .sidebar a {
+      color: #69af6c;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+    .content img {
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .content {
+      margin-bottom: 50px;
+    }
+    dd {
+      margin-bottom: 10px;
+    }
+    .footer {
+      text-align: center;
+      color: #999;
+      font-size: 0.9em;
+      margin-top: 40px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+    }
+  </style>
 </head>
 <body>
 
-
 <!-- Navigation -->
-	<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-	  <div class="container">
-		<div class="navbar-header">
-		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-		</div>
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#teaching">Teaching</a></li>
+        <li><a href="#cv">Curriculum Vitae</a></li> 
+      </ul>
+    </div>
+  </div>
+</nav>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		  <ul class="nav navbar-nav">
-				  <li><a href="index.html">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#research">Research</a></li>
-          <li><a href="#teaching">Teaching</a></li>
-				  <!-- <li><a href="#projects">Projects</a></li> -->
-				  <!-- <li><a href="#publications">Publications</a></li> -->
-				  <li><a href="#cv">Curriculum Vitae</a></li> 
-		  </ul>
-		</div>
-	  </div>
-	</nav>
-  
-  <!-- Page Content -->
-    <div class="container">
+<!-- Page Content -->
+<div class="container">
+  <div class="row">
 
-        <div class="row">
+    <!-- Sidebar with Contact Info -->
+    <div class="col-md-3 sidebar">
+      <h3>Sabri Meyer</h3>
+      <p><strong>MSc in Mathematics</strong></p>
+      <p><b><a href="mailto:sabri.meyer@unibas.ch">sabri.meyer@unibas.ch</a></b></p>
+      <p>Department of Mathematics and Computer Science<br>University of Basel</p>
+      <p><strong>Office</strong><br>Spiegelgasse 1<br>4051 Basel, Switzerland</p>
 
-            <!-- Contact Info on the Sidebar -->
-            <div class="col-md-4">
-                <div style="font-family: 'Arial', sans-serif; font-size: 32px;"><b>Sabri Meyer</b></div><br>
-                <p> <span style="font-size: larger;"> MSc in Mathematics </span></p>
-                <p><b><a href="mailto:sabri.meyer@unibas.ch">sabri.meyer@unibas.ch</a></b><br>
-                <p>Department of Mathematics and Computer Science<br>
-                University of Basel<br></p>
-                <p><strong>Office</strong><br>
-                Spiegelgasse 1<br>
-                4051 Basel <br>
-                Switzerland<br>
-                </p>
-            </div>
+      <!-- Sidebar Links -->
+      <dd><a href="https://github.com/sabrimeyer">GitHub</a></dd> 
+      <dd><a href="https://www.youtube.com/@sabrimeyer4424">YouTube</a></dd>
+    </div>
 
-            <!-- Entries Column -->
-            <div class="col-md-8" style="height: 100vh;">
-                
-                <!-- Main Image -->
-                <img class="img-responsive" src="photo.gif" alt=""><br>
-                
-                <h2 id="about">About Me</h2>
-                <div style="margin-top:3%; text-align:justify;">                
-					<p>I am a PhD student in the field of quantum machine learning, affiliated with the <a href="https://omls.dmi.unibas.ch/en/" target="_blank">Optimization of Machine Learning Systems Group</a> at the University of Basel, under the supervision of Prof. Dr. Aurelien Lucchi and Prof. Dr. Jiři Černý. My research is funded by the <a href="https://data.snf.ch/grants/grant/214919" target="_blank">SNSF</a> and involves collaborative efforts with <a href="https://www.zurich.ibm.com/" target="_blank">IBM Research Zürich</a>.</p>
-           <p>In my free time I enjoy experimenting with the musical production of various genres and arrangements. Some of my creations are archived on my <a href="https://www.youtube.com/@sabrimeyer4424" target="_blank">YouTube</a> channel.</p>
-              </div>
-            </div>
-            
-            
-            <!-- Links on the Sidebar -->
-            <div class="col-md-4" style="margin-top:2%">
-              <dd><a href="https://github.com/sabrimeyer">GitHub</a></dd> 
-              <dd><a href="https://www.youtube.com/@sabrimeyer4424">YouTube</a></dd>
-            </div>
+    <!-- Main Content -->
+    <div class="col-md-9 content">
 
-            <!-- Research -->
-            <div class="col-md-8" style="height: 30vh;">    
-                <h2 id="research">Research</h2>
-                <p>I am currently interested in the mathematical analysis of the loss landscape of quantum neural networks. Presently, I concretely work on designing and initializing universally expressive quantum neural networks that do not suffer from the barren-plateau problem; a necessary condition for the model being able to learn using gradient methods. Additionally, I aim to ensure that the model is able to exhibit quantum advantage. I am also very interested in investigating the training dynamics next.</p>
-            </div>
+      <!-- Main Image -->
+      <img class="img-responsive" src="photo.gif" alt="Profile Image">
 
-            <!-- Publications -->
-            <!-- <div class="col-md-8" style="height: 100vh;">    
-                <h2 id="publications">Publications</h2>
-                
-                <strong>Peer-reviewed</strong><br/>
-                <ul>
-                <li class="paper" words="add, your, keywords, here"><a href="#">Full title</a> Names of the authors</li>
-                </ul>
-            
-                <strong>Technical Reports</strong><br/>
-                <ul>
-                <li class="paper" words="add, your, keywords, here"><a href="#">Full title</a>. Details of the report</li>
-                </ul>
-            </div> -->
+      <!-- About Section -->
+      <h2 id="about">About Me</h2>
+      <p>I am a PhD student in the field of quantum machine learning, affiliated with the <a href="https://omls.dmi.unibas.ch/en/" target="_blank">Optimization of Machine Learning Systems Group</a> at the University of Basel, under the supervision of Prof. Dr. Aurelien Lucchi and Prof. Dr. Jiři Černý. My research is funded by the <a href="https://data.snf.ch/grants/grant/214919" target="_blank">SNSF</a> and involves collaborative efforts with <a href="https://www.zurich.ibm.com/" target="_blank">IBM Research Zürich</a>.</p>
+      <p>In my free time I enjoy experimenting with the musical production of various genres and arrangements. Some of my creations are archived on my <a href="https://www.youtube.com/@sabrimeyer4424" target="_blank">YouTube</a> channel.</p>
 
-            <!-- Teaching -->
-            <div class="col-md-8" style="height: 30vh;">    
-                <h2 id="teaching">Teaching</h2>
-                
-                <strong>Fall Semester 2023:</strong> Teacher Assistant in Mathematics of Data Science,</a><i> Graduate Course at the University of Basel</i>
-                  <ul><li><i>Introduction to probability theory and mathematical statistics</i></li>
-                  <li><i>Random matrix theory, concentration inequalities and dimensionality reduction</i>
-                  <li><i>Graph theory, spectral clustering and diffusion maps</i></li>
-                  </li></ul>
-            </div>
+      <!-- Research Section -->
+      <h2 id="research">Research</h2>
+      <p>I am currently focused on the mathematical analysis of the loss landscape in quantum neural networks. Specifically, my work involves designing and initializing universally expressive quantum neural networks that avoid the barren-plateau problem, which is crucial for enabling learning through gradient-based methods. Furthermore, I aim to ensure the model demonstrates quantum advantage. I am also keen to explore the training dynamics in the near future.</p>
 
+      <!-- Teaching Section -->
+      <h2 id="teaching">Teaching</h2>
+      <strong>Fall Semester 2023:</strong> Teacher Assistant in Mathematics of Data Science
+      <ul>
+        <li>Introduction to probability theory and mathematical statistics</li>
+        <li>Random matrix theory, concentration inequalities, and dimensionality reduction</li>
+        <li>Graph theory, spectral clustering, and diffusion maps</li>
+      </ul>
 
-            <!-- CV -->
-            <div class="col-md-8">    
-                <h2 id="cv">Curriculum Vitae</h2>
-
-                <strong>2023 - Present:</strong>  <span style="font-size: larger;"> PhD in Quantum Machine Learning, University of Basel </span></p>
-                
-                <strong>2021 - 2023:</strong> <span style="font-size: larger;"> Master of Science in Mathematics, University of Basel </span><br/>
-                <ul>
-                <li><i>Specialized in Algebraic Number Theory, Analysis of PDE & Stochastic Analysis</li>
-                <li><a href="https://github.com/sabrimeyer/master-thesis" target="_blank">Master Thesis</a> about the Hessian Eigenspectrum of Nonlinear Neural Networks</li>
-                <li>Electives in Theoretical Quantum Mechanics</i></li>
-                </ul>
-            
-                <strong>2018 - 2021:</strong> <span style="font-size: larger;"> Bachelor of Science in Mathematics, University of Basel</span><br/>
-                <ul>
-                <li> <i>Electives in Physics & Computer Science</i> </li>
-                </ul>
-            </div>
-
-            
-        </div>
-
+      <!-- CV Section -->
+      <h2 id="cv">Curriculum Vitae</h2>
+      <strong>2023 - Present:</strong> PhD in Quantum Machine Learning, University of Basel
+      <br><br>
+      <strong>2021 - 2023:</strong> Master of Science in Mathematics, University of Basel
+      <ul>
+        <li>Specialized in Algebraic Number Theory, Analysis of PDE & Stochastic Analysis</li>
+        <li><a href="https://github.com/sabrimeyer/master-thesis" target="_blank">Master Thesis</a> on the Hessian Eigenspectrum of Nonlinear Neural Networks</li>
+        <li>Electives in Theoretical Quantum Mechanics</li>
+      </ul>
+      <strong>2018 - 2021:</strong> Bachelor of Science in Mathematics, University of Basel
+      <ul>
+        <li>Electives in Physics & Computer Science</li>
+      </ul>
 
     </div>
-    <!-- /.container -->
-    
-    <!-- Other people may like it too! -->
-    <a style="color:#b5bec9;font-size:0.8em; float:right;">&copy; 2024 Sabri Meyer</a> 
-    
-</body>
+  </div>
+</div>
 
+<!-- Footer -->
+<div class="footer">
+  &copy; 2024 Sabri Meyer
+</div>
+
+</body>
 </html>
