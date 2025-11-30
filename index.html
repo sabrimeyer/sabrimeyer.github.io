@@ -1,113 +1,236 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <title>Sabri Meyer</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJzLQQ8yH0s7/y2lT75AAB4030+S2Y3+H8Jz5iE3Yt4N4ZJ5i4QJ8y5iQJ8y5i4QJ8y5i4Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <style>
+    /* 1. Variables and Base Styles */
+    :root {
+      --color-primary: #000000;
+      --color-secondary: #548a56;
+      --color-accent: #3d423d;
+      --color-text: #333;
+      --color-background-light: #f9f9f9;
+      --font-body: 'Open Sans', sans-serif;
+      --font-heading: 'Open Sans', sans-serif;
+    }
+    
     body {
-      font-family: 'Arial', sans-serif;
-      line-height: 1.6;
+      font-family: var(--font-body);
+      line-height: 1.7;
+      color: var(--color-text);
+      background-color: #fff;
+      margin: 0;
     }
-    nav {
-      background-color: #00274d;
-      border: none;
-    }
-    nav a {
-      color: #fff !important;
-    }
-    nav a:hover {
-      background-color: #69af6c;
-    }
-    .navbar-toggle {
-      border-color: transparent;
-    }
-    .navbar-collapse {
-      text-align: center;
-    }
-    h2 {
-      font-family: 'Oswald', sans-serif;
-      color: #69af6c;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #69af6c;
-      padding-bottom: 10px;
-    }
+
+    /* 2. Layout Structure  */
     .container {
-      margin-top: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
     }
+    
+    .main-grid {
+      display: flex;
+      gap: 30px;
+      padding-top: 40px;
+    }
+    
     .sidebar {
-      background-color: #f7f7f7;
-      padding: 20px;
-      border-radius: 8px;
+      flex: 0 0 280px; /* Fixed width sidebar */
+      background-color: var(--color-background-light);
+      padding: 30px 20px;
+      border-radius: 6px;
+      align-self: flex-start; /* Stick to the top */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     }
-    .sidebar h3 {
-      font-size: 28px;
-      color: #69af6c;
+    
+    .content {
+      flex-grow: 1;
+      padding-bottom: 50px;
+    }
+
+    /* 3. Typography and Headings */
+    h1, h2, h3 {
+      font-family: var(--font-heading);
+      color: var(--color-primary);
       margin-top: 0;
     }
-    .sidebar a {
-      color: #69af6c;
-      font-weight: bold;
-      text-decoration: none;
+    
+    h2 {
+      font-size: 2.2rem;
+      color: var(--color-secondary);
+      margin-top: 50px;
+      margin-bottom: 15px;
+      border-bottom: 2px solid var(--color-accent); /* Green accent line */
+      padding-bottom: 8px;
+      letter-spacing: 0.5px;
     }
-    .sidebar a:hover {
+
+    .sidebar h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+    
+    .sidebar p {
+        margin-bottom: 10px;
+        font-size: 0.95rem;
+    }
+
+    /* 4. Navigation */
+    .navbar {
+      background-color: var(--color-primary);
+      padding: 15px 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .nav-list {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .nav-list li a {
+      color: #fff;
+      padding: 10px 18px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.3s;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.9rem;
+    }
+    
+    .nav-list li a:hover {
+      background-color: var(--color-accent);
+    }
+    
+    /* 5. Links and Details */
+    a {
+      color: var(--color-secondary);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    a:hover {
+      color: var(--color-accent);
       text-decoration: underline;
     }
-    .content img {
+    
+    dd a, .sidebar a {
+      color: var(--color-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+      text-decoration: none;
+    }
+    
+    dd a:hover, .sidebar a:hover {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    /* 6. Content Specific Styles */
+    .profile-image {
+      max-width: 100%;
+      height: auto;
       border-radius: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
-    .content {
-      margin-bottom: 50px;
+
+    /* Custom List for Publications */
+    ol.custom-counter {
+      list-style: none;
+      counter-reset: item;
+      padding-left: 0;
     }
-    dd {
-      margin-bottom: 10px;
+    
+    ol.custom-counter li {
+      counter-increment: item;
+      margin-bottom: 1.5em;
+      position: relative;
+      padding-left: 2em; /* Space for the counter */
     }
+    
+    ol.custom-counter li::before {
+      content: "[" counter(item) "]";
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+      color: var(--color-accent);
+    }
+
+    /* General List Styles */
+    ul {
+      list-style: square;
+      padding-left: 20px;
+    }
+    
+    li {
+      margin-bottom: 5px;
+    }
+
+    /* Description List */
+    dt, dd {
+      margin: 0;
+    }
+    
+    /* 7. Footer */
     .footer {
       text-align: center;
       color: #999;
       font-size: 0.9em;
-      margin-top: 40px;
-      border-top: 1px solid #ccc;
-      padding-top: 10px;
+      padding: 20px 0;
+      border-top: 1px solid #eee;
     }
-    ol.custom-counter {
-      list-style: none;
-      counter-reset: item;
-      padding-left: 1.5em;
-    }
-    ol.custom-counter li {
-      counter-increment: item;
-      margin-bottom: 0.5em;
-      position: relative;
-    }
-    ol.custom-counter li::before {
-      content: "[" counter(item) "]";
-      position: absolute;
-      left: -1.5em;
+    
+    /* Responsive adjustment */
+    @media (max-width: 992px) {
+      .main-grid {
+        flex-direction: column;
+      }
+      .sidebar {
+        flex: auto;
+        border-radius: 0;
+        box-shadow: none;
+        padding-top: 15px;
+      }
+      .nav-list {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+      .nav-list li a {
+        padding: 8px 12px;
+      }
+      .content {
+        padding-top: 0;
+      }
     }
   </style>
 </head>
 <body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+<header class="navbar">
   <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+    <nav>
+      <ul class="nav-list">
         <li><a href="index.html">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#publications">Publications</a></li>
@@ -116,97 +239,106 @@
         <li><a href="#teaching">Teaching</a></li>
         <li><a href="#cv">Curriculum Vitae</a></li> 
       </ul>
-    </div>
+    </nav>
   </div>
-</nav>
+</header>
 
-<!-- Page Content -->
 <div class="container">
-  <div class="row">
+  <div class="main-grid">
 
-    <!-- Sidebar with Contact Info -->
-    <div class="col-md-3 sidebar">
-      <h3>Sabri Meyer</h3>
+    <aside class="sidebar">
+      <h3>SABRI MEYER</h3>
       <p><strong>MSc in Mathematics</strong></p>
-      <p><b><a href="mailto:sabri.meyer@unibas.ch">sabri.meyer@unibas.ch</a></b></p>
+      
+      <p><b><a href="mailto:sabri.meyer@unibas.ch"><i class="fa-solid fa-envelope"></i> sabri.meyer@unibas.ch</a></b></p>
       <p>Department of Mathematics and Computer Science<br>University of Basel</p>
       <p><strong>Office</strong><br>Spiegelgasse 1<br>4051 Basel, Switzerland</p>
 
-      <!-- Sidebar Links -->
-      <dd><a href="https://scholar.google.com/citations?user=Y4PaSKwAAAAJ&hl=en&oi=ao">Google Scholar</a></dd>
-      <dd><a href="https://github.com/sabrimeyer">GitHub</a></dd>
-      <dd><a href="https://www.linkedin.com/in/sabri-meyer-69865b33b/">LinkedIn</a></dd> 
-      <dd><a href="https://www.youtube.com/@sabrimeyer4424">YouTube</a></dd>
-    </div>
+      <dl>
+        <dd><a href="https://scholar.google.com/citations?user=Y4PaSKwAAAAJ&hl=en&oi=ao"><i class="fa-brands fa-google-scholar"></i> Google Scholar</a></dd>
+        <dd><a href="https://github.com/sabrimeyer"><i class="fa-brands fa-github"></i> GitHub</a></dd>
+        <dd><a href="https://www.linkedin.com/in/sabri-meyer-69865b33b/"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></dd> 
+        <dd><a href="https://www.youtube.com/@sabrimeyer4424"><i class="fa-brands fa-youtube"></i> YouTube</a></dd>
+      </dl>
+    </aside>
 
-    <!-- Main Content -->
-    <div class="col-md-9 content">
+    <main class="content">
 
-      <!-- Main Image -->
-      <img class="img-responsive" src="photo.gif" alt="Profile Image">
+      <img class="profile-image" src="photo.gif" alt="Profile Image">
 
-      <!-- About Section -->
       <h2 id="about">About Me</h2>
-      <p>I am a PhD student in the field of quantum machine learning, affiliated with the <a href="https://sites.google.com/view/omls-group" target="_blank">Optimization of Machine Learning Systems Group</a> at the University of Basel, under the supervision of Aurelien Lucchi and Jiři Černý. My research is funded by the <a href="https://data.snf.ch/grants/grant/214919" target="_blank">SNSF</a> and involves collaborative efforts with <a href="https://www.zurich.ibm.com/" target="_blank">IBM Research Zürich</a>.</p>
-      <p>In my free time I enjoy experimenting with the musical production of various genres and arrangements. Some of my creations are archived on my <a href="https://www.youtube.com/@sabrimeyer4424" target="_blank">YouTube</a> channel.</p>
+      <p>I am a doctoral researcher in the field of quantum machine learning, affiliated with the <a href="https://sites.google.com/view/omls-group" target="_blank">Optimization of Machine Learning Systems Group</a> at the University of Basel, under the supervision of Aurélien Lucchi and Jiří Černý. My research is funded by the <a href="https://data.snf.ch/grants/grant/214919" target="_blank">SNSF</a> and involves collaborative efforts with <a href="https://www.zurich.ibm.com/" target="_blank">IBM Research Zürich</a>.</p>
+      <p>In my free time, I enjoy experimenting with the musical production of various genres and arrangements. Some of my creations are archived on my <a href="https://www.youtube.com/@sabrimeyer4424" target="_blank">YouTube</a> channel.</p>
 
-      <!-- Publications Section -->
       <h2 id="publications">Publications</h2>
       <ol class="custom-counter">
         <li><u>Sabri Meyer</u>, Francesco Scala, Francesco Tacchino and Aurelien Lucchi. <i>Trainability of Quantum Models Beyond Known Classical Simulability.</i> arXiv preprint <a href="https://arxiv.org/abs/2507.06344" target="_blank">arXiv:2507.06344</a>, 2025.</li>
       </ol>
 
-      <!-- Research Section -->
       <h2 id="research">Research</h2>
-      <p>My research focuses on the <strong>mathematical analysis of Variational Quantum Algorithms (VQAs)</strong>, with an emphasis on understanding the optimization landscape of quantum expectation values in <i>Parameterized Quantum Circuits (PQCs)</i>. Specifically, I study the design of quantum circuit architectures, parameter initialization strategies, and classical simulation techniques to investigate the trade-offs between trainability and classical simulability.</p>
-      <p>I am also interested in computational complexity and questions regarding <i>Quantum Advantage</i>; scenarios where quantum devices outperform any known classical alternatives.</p>
-      <p>In addition, I aim to explore efficient data encoding methods for <i>Quantum Machine Learning (QML)</i> and to better understand the training dynamics of these models in upcoming research.</p>
+      <div>
+        <p>My research focuses on the <b>Mathematical Analysis of Variational Quantum Algorithms (VQAs)</b>, which are optimized by tuning <b>Parameterized Quantum Circuits (PQCs)</b> with classical algorithms. I emphasize understanding the optimization landscape of quantum expectation values in PQCs and investigating the trade-offs between trainability and classical simulability.</p>
 
-      <!-- Conferences & Workshops Section -->
+        <p>A major theoretical challenge in this field is the <b>Barren Plateau Problem</b>, which causes gradients to vanish exponentially, making it difficult to find a good solution. While mitigation techniques can alleviate this, they often lead to the quantum model becoming classically simulable, thereby ruling out <b>Quantum Advantage</b>.</p>
+        
+        <p>This led to the currently debated conjecture proposed by <a href="https://www.nature.com/articles/s41467-025-63099-6" target="_blank">Cerezo et al.</a>: <i>Does the provable absence of barren plateaus necessarily imply classical simulability?</i> As a mathematician, I am deeply intrigued by this theoretical challenge and the complex algebraic structures that allow for <b>Classical Simulation</b>. My goal is to contribute to proving or disproving this fundamental conjecture.</p>
+        
+        <p>In summary, find it fascinating how fruitful the field of quantum machine learning is, and I appreciate the opportunity to apply abstract mathematics from my graduate studies to these pressing, interdisciplinary problems.</p>
+      </div>
+      
+
       <h2 id="conferences">Conferences & Workshops</h2>
-      <strong>LMS Research School 2025:</strong> <i>Quantum Machine Learning and Hamiltonian Simulation.</i> Sabhal Mor Ostaig (Gaelic College), Scotland.
-      <br>
-      <strong>QTML 2024:</strong> <i>8th International Conference on Quantum Techniques in Machine Learning.</i> University of Melbourne, Australia.
+      <p><strong>QTML 2025:</strong> <i>9th International Conference on Quantum Techniques in Machine Learning.</i> Marina Bay Sands & National University of Singapore (NUS), Singapore.</p>
+      <p><strong>LMS Research School 2025:</strong> <i>Quantum Machine Learning and Hamiltonian Simulation.</i> Sabhal Mor Ostaig (Gaelic College), Scotland.</p>
+      <p><strong>QTML 2024:</strong> <i>8th International Conference on Quantum Techniques in Machine Learning.</i> University of Melbourne, Australia.</p>
 
-      <!-- Teaching Section -->
       <h2 id="teaching">Teaching</h2>
-      <strong>Fall Semester 2025:</strong> <i>Teacher Assistant in Mathematics of Data Science</i>
+      <p><strong>Fall Semester 2025:</strong> <i>Teacher Assistant in Mathematics of Data Science</i></p>
       <ul>
         <li>Introduction to probability theory and mathematical statistics</li>
         <li>Random matrix theory, concentration inequalities, functional calculus and high-dimensional analysis</li>
         <li>Marchenko–Pastur law, neural networks, distance distributions, and stochastic processes</li>
       </ul>
-      <br>
-      <strong>Fall Semester 2023:</strong> <i>Teacher Assistant in Mathematics of Data Science</i>
+      <p><strong>Fall Semester 2023:</strong> <i>Teacher Assistant in Mathematics of Data Science</i></p>
       <ul>
         <li>Introduction to probability theory and mathematical statistics</li>
         <li>Random matrix theory, concentration inequalities, and dimensionality reduction</li>
         <li>Graph theory, spectral clustering, and diffusion maps</li>
       </ul>
 
-      <!-- CV Section -->
       <h2 id="cv">Curriculum Vitae</h2>
-      <strong>2023 - Present:</strong> <i>PhD in Quantum Machine Learning</i>, University of Basel
-      <br>
-      <strong>2021 - 2023:</strong> <i>Master of Science in Mathematics</i>, University of Basel
+      <p><strong>2023 - Present:</strong> <i>PhD in Quantum Machine Learning</i>, University of Basel</p>
+      <ul>
+        <li>Electives in Algebraic Geometry</li>
+      </ul>
+      <p><strong>2021 - 2023:</strong> <i>Master of Science in Mathematics</i>, University of Basel</p>
       <ul>
         <li>Specialized in Algebraic Number Theory, Analysis of Partial Differential Equations and Stochastic Analysis</li>
         <li><a href="https://github.com/sabrimeyer/master-thesis" target="_blank">Master Thesis</a> on the Hessian Eigenspectrum of Nonlinear Neural Networks</li>
         <li>Electives in Theoretical Quantum Mechanics</li>
       </ul>
-      <strong>2018 - 2021:</strong> <i>Bachelor of Science in Mathematics</i>, University of Basel
+      <p><strong>2018 - 2021:</strong> <i>Bachelor of Science in Mathematics</i>, University of Basel</p>
       <ul>
         <li>Electives in Physics & Computer Science</li>
       </ul>
 
-    </div>
+    </main>
   </div>
 </div>
 
-<!-- Footer -->
 <div class="footer">
   &copy; 2025 Sabri Meyer
 </div>
-
+<script>
+  // Simple smooth scrolling for internal links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
 </body>
 </html>
