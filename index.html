@@ -7,18 +7,18 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJzLQQ8yH0s7/y2lT75AAB4030+S2Y3+H8Jz5iE3Yt4N4ZJ5i4QJ8y5iQJ8y5i4QJ8y5i4Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
     /* 1. Variables and Base Styles */
     :root {
-      --color-primary: #000000;
-      --color-secondary: #548a56;
+      --color-primary: #1a1a1a;
+      --color-secondary: #3e7041;
       --color-accent: #3d423d;
-      --color-text: #333;
-      --color-background-light: #f9f9f9;
+      --color-text: #2d2d2d;
+      --color-background-light: #f8f9fa;
       --font-body: 'Open Sans', sans-serif;
       --font-heading: 'Open Sans', sans-serif;
     }
@@ -31,26 +31,36 @@
       margin: 0;
     }
 
-    /* 2. Layout Structure  */
+    /* 2. Layout Structure */
     .container {
-      max-width: 1200px;
+      max-width: 1140px;
       margin: 0 auto;
-      padding: 0 15px;
+      padding: 0 20px;
     }
     
     .main-grid {
       display: flex;
-      gap: 30px;
+      gap: 40px;
       padding-top: 40px;
     }
     
     .sidebar {
-      flex: 0 0 280px; /* Fixed width sidebar */
+      flex: 0 0 260px;
       background-color: var(--color-background-light);
-      padding: 30px 20px;
-      border-radius: 6px;
-      align-self: flex-start; /* Stick to the top */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      padding: 25px 20px;
+      border-radius: 8px;
+      align-self: flex-start;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border: 1px solid #eaeaea;
+    }
+
+    .sidebar-photo {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      display: block;
     }
     
     .content {
@@ -66,34 +76,42 @@
     }
     
     h2 {
-      font-size: 2.2rem;
+      font-size: 2rem;
       color: var(--color-secondary);
-      margin-top: 50px;
-      margin-bottom: 15px;
-      border-bottom: 2px solid var(--color-accent); /* Green accent line */
+      margin-top: 45px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--color-accent);
       padding-bottom: 8px;
       letter-spacing: 0.5px;
+      scroll-margin-top: 30px;
+    }
+
+    section:first-child h2 {
+      margin-top: 0; /* Remove top spacing on the first section */
     }
 
     .sidebar h3 {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: 700;
       color: var(--color-primary);
-      margin-bottom: 15px;
-      border-bottom: 1px solid #ccc;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #ddd;
       padding-bottom: 10px;
     }
     
     .sidebar p {
-        margin-bottom: 10px;
-        font-size: 0.95rem;
+      margin-bottom: 12px;
+      font-size: 0.92rem;
     }
 
     /* 4. Navigation */
     .navbar {
       background-color: var(--color-primary);
-      padding: 15px 0;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 12px 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     
     .nav-list {
@@ -102,60 +120,62 @@
       list-style: none;
       margin: 0;
       padding: 0;
+      flex-wrap: wrap;
     }
     
     .nav-list li a {
       color: #fff;
-      padding: 10px 18px;
+      padding: 8px 16px;
       text-decoration: none;
       display: block;
-      transition: background-color 0.3s;
+      transition: background-color 0.2s ease;
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      border-radius: 4px;
     }
     
     .nav-list li a:hover {
       background-color: var(--color-accent);
     }
     
-    /* 5. Links and Details */
+    /* 5. Links and Social Icons */
     a {
       color: var(--color-secondary);
       text-decoration: none;
-      transition: color 0.3s;
+      transition: color 0.2s ease;
     }
     
     a:hover {
-      color: var(--color-accent);
+      color: var(--color-primary);
       text-decoration: underline;
     }
     
-    dd a, .sidebar a {
+    .sidebar dl {
+      margin: 15px 0 0 0;
+    }
+
+    .sidebar dd {
+      margin: 0;
+    }
+
+    .sidebar dd a {
       color: var(--color-secondary);
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 4px 0;
+      gap: 10px;
+      padding: 6px 0;
       text-decoration: none;
+      font-size: 0.95rem;
     }
     
-    dd a:hover, .sidebar a:hover {
+    .sidebar dd a:hover {
       color: var(--color-primary);
       text-decoration: underline;
     }
 
-    /* 6. Content Specific Styles */
-    .profile-image {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Custom List for Publications */
+    /* 6. Content Specific Styling */
     ol.custom-counter {
       list-style: none;
       counter-reset: item;
@@ -164,9 +184,9 @@
     
     ol.custom-counter li {
       counter-increment: item;
-      margin-bottom: 1.5em;
+      margin-bottom: 1.2em;
       position: relative;
-      padding-left: 2em; /* Space for the counter */
+      padding-left: 2.2em;
     }
     
     ol.custom-counter li::before {
@@ -174,53 +194,49 @@
       position: absolute;
       left: 0;
       font-weight: bold;
-      color: var(--color-accent);
+      color: var(--color-secondary);
     }
 
-    /* General List Styles */
     ul {
       list-style: square;
       padding-left: 20px;
     }
     
     li {
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
 
-    /* Description List */
-    dt, dd {
-      margin: 0;
-    }
-    
     /* 7. Footer */
     .footer {
       text-align: center;
-      color: #999;
-      font-size: 0.9em;
-      padding: 20px 0;
+      color: #777;
+      font-size: 0.88em;
+      padding: 30px 0;
       border-top: 1px solid #eee;
+      margin-top: 40px;
     }
     
-    /* Responsive adjustment */
+    /* Responsive Adjustments */
     @media (max-width: 992px) {
       .main-grid {
         flex-direction: column;
+        gap: 20px;
       }
       .sidebar {
         flex: auto;
-        border-radius: 0;
-        box-shadow: none;
-        padding-top: 15px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .sidebar-photo {
+        max-width: 240px;
+        margin: 0 auto 20px auto;
       }
       .nav-list {
-        flex-wrap: wrap;
         justify-content: flex-start;
       }
       .nav-list li a {
-        padding: 8px 12px;
-      }
-      .content {
-        padding-top: 0;
+        padding: 6px 10px;
+        font-size: 0.8rem;
       }
     }
   </style>
@@ -231,13 +247,13 @@
   <div class="container">
     <nav>
       <ul class="nav-list">
-        <li><a href="index.html">Home</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#publications">Preprints</a></li>
         <li><a href="#research">Research</a></li>
-        <li><a href="#conferences">Conferences & Workshops</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#preprints">Preprints</a></li>
+        <li><a href="#conferences">Conferences</a></li>
         <li><a href="#teaching">Teaching</a></li>
-        <li><a href="#cv">Curriculum Vitae</a></li> 
+        <li><a href="#cv">CV</a></li> 
       </ul>
     </nav>
   </div>
@@ -246,100 +262,161 @@
 <div class="container">
   <div class="main-grid">
 
+    <!-- Sidebar -->
     <aside class="sidebar">
+      <img class="sidebar-photo" src="photo.gif" alt="Sabri Meyer Profile Photo">
+
       <h3>SABRI MEYER</h3>
       <p><strong>MSc in Mathematics</strong></p>
+      <p>Doctoral Researcher in QML</p>
       
-      <p><b><a href="mailto:sabri.meyer@unibas.ch"><i class="fa-solid fa-envelope"></i> sabri.meyer@unibas.ch</a></b></p>
-      <p>Department of Mathematics and Computer Science<br>University of Basel</p>
-      <p><strong>Office</strong><br>Spiegelgasse 1<br>4051 Basel, Switzerland</p>
+      <p><a href="mailto:sabri.meyer@unibas.ch"><i class="fa-solid fa-envelope"></i> sabri.meyer@unibas.ch</a></p>
+      
+      <p><strong>Affiliation</strong><br>
+      Department of Mathematics and Computer Science<br>
+      University of Basel</p>
+      
+      <p><strong>Office</strong><br>
+      Spiegelgasse 1<br>
+      4051 Basel, Switzerland</p>
 
       <dl>
-        <dd><a href="https://scholar.google.com/citations?user=Y4PaSKwAAAAJ&hl=en&oi=ao"><i class="fa-brands fa-google-scholar"></i> Google Scholar</a></dd>
-        <dd><a href="https://github.com/sabrimeyer"><i class="fa-brands fa-github"></i> GitHub</a></dd>
-        <dd><a href="https://www.linkedin.com/in/sabri-meyer-69865b33b/"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></dd> 
-        <dd><a href="https://www.youtube.com/@sabrimeyer4424"><i class="fa-brands fa-youtube"></i> YouTube</a></dd>
+        <dd><a href="https://scholar.google.com/citations?user=Y4PaSKwAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-google-scholar"></i> Google Scholar</a></dd>
+        <dd><a href="https://github.com/sabrimeyer" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a></dd>
+        <dd><a href="https://www.linkedin.com/in/sabri-meyer-69865b33b/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></dd> 
+        <dd><a href="https://www.youtube.com/@sabrimeyer4424" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> YouTube</a></dd>
       </dl>
     </aside>
 
+    <!-- Main Content -->
     <main class="content">
 
-      <img class="profile-image" src="photo.gif" alt="Profile Image">
+      <!-- About Section -->
+      <section id="about">
+        <h2>About Me</h2>
 
-      <h2 id="about">About Me</h2>
-      <p>I am a doctoral researcher in the field of <b>Quantum Machine Learning (QML)</b>, affiliated with the <a href="https://sites.google.com/view/omls-group" target="_blank">Optimization of Machine Learning Systems Group</a> at the University of Basel, under the supervision of Aurelien Lucchi and Jiří Černý. My research is funded by the <a href="https://data.snf.ch/grants/grant/214919" target="_blank">SNSF</a> and involves collaborative efforts with <a href="https://www.zurich.ibm.com/" target="_blank">IBM Research Zürich</a>.</p>
-      <p>In my free time, I enjoy experimenting with the musical production of various genres and arrangements. Some of my creations are archived on my <a href="https://www.youtube.com/@sabrimeyer4424" target="_blank">YouTube</a> channel.</p>
+        <p>
+          I am a PhD researcher in <strong>Quantum Machine Learning (QML)</strong> at the University of Basel, working within the 
+          <a href="https://sites.google.com/view/omls-group" target="_blank" rel="noopener noreferrer">Optimization of Machine Learning Systems Group</a>. 
+          My research is supported by the 
+          <a href="https://data.snf.ch/grants/grant/214919" target="_blank" rel="noopener noreferrer">SNSF</a> 
+          and conducted in collaboration with 
+          <a href="https://www.zurich.ibm.com/" target="_blank" rel="noopener noreferrer">IBM Research Zürich</a>.
+        </p>
 
-      <h2 id="publications">Preprints</h2>
-      <ol class="custom-counter">
-        <li><u>Sabri Meyer</u>, Francesco Scala, Francesco Tacchino and Aurelien Lucchi. <i>Trainability of Quantum Models Beyond Known Classical Simulability.</i> arXiv preprint <a href="https://arxiv.org/abs/2507.06344" target="_blank">arXiv:2507.06344</a>, 2025.</li>
-      </ol>
+        <p>
+          Driven by a passion for mathematics, physics, and computer science, my goal is to leverage abstract mathematical frameworks to solve complex, real-world problems. My interest in computation originated from an early curiosity about how software simulates reality, from digital physics in movies to video game mechanics and design.
+        </p>
 
-      <h2 id="research">Research</h2>
-      <div>
-        <p>My research focuses on the <b>Mathematical Analysis of Variational Quantum Algorithms (VQAs)</b>, which are optimized by tuning <b>Parameterized Quantum Circuits (PQCs)</b> with classical algorithms. I emphasize understanding the optimization landscape of quantum expectation values in PQCs and investigating the trade-offs between trainability and classical simulability.</p>
+        <p>
+          Outside of research, I produce music across various genres and styles. You can explore some of my creations on 
+          <a href="https://www.youtube.com/@sabrimeyer4424" target="_blank" rel="noopener noreferrer">YouTube</a>.
+        </p>
+      </section>
 
-        <p>A major theoretical challenge in this field is the <b>Barren Plateau Problem</b>, which causes gradients to vanish exponentially in the model size, making it very difficult to find a good solution. While mitigation techniques can alleviate this, they consistently appear to cause the quantum model becoming classically simulable, thereby ruling out <b>Quantum Advantage</b>.</p>
-        
-        <p>This led to the currently debated conjecture proposed by <a href="https://www.nature.com/articles/s41467-025-63099-6" target="_blank">Cerezo et al.</a>: <i>Does the provable absence of barren plateaus necessarily imply classical simulability?</i> As a mathematician, I am deeply intrigued by this theoretical challenge and the complex algebraic structures that allow for <b>Classical Simulation</b> strategies. My goal is to contribute to proving or disproving this fundamental conjecture.</p>
-        
-        <p>I generally find the potential of <b>Quantum Machine Learning (QML)</b> fascinating, and I appreciate the opportunity to apply abstract mathematics from my graduate studies to underlying interdisciplinary problems of this field.</p>
-      </div>
-      
+      <!-- Research Section -->
+      <section id="research">
+        <h2>Research</h2>
+        <p>
+          My research lies at the intersection of mathematics, theoretical computer science, and physics, focusing on the rigorous mathematical foundations of Quantum Machine Learning (QML). I leverage theoretical tools from high-dimensional probability, mathematical optimization, statistical learning theory, and computational complexity to investigate three main pillars:
+        </p>
+        <ul>
+          <li>
+            <strong>Optimization Landscapes and Trainability:</strong> A fundamental barrier in training variational quantum algorithms is the <i>barren plateau</i> phenomenon, where cost function gradients vanish exponentially with system size. While mitigation strategies can improve gradient scaling, they frequently force quantum models into regimes that are classically simulable. My research includes mathematically characterizing this trainability–simulability trade-off.
+          </li>
+          <li>
+            <strong>Boundaries of Classical Simulation:</strong> Beyond developing algorithms for simulating quantum circuits, I also explore the exact computational boundaries separating classical simulability from non-classical quantum hardness. A key theoretical conjecture guiding this work is whether eliminating barren plateaus fundamentally implies classical simulability, thereby constraining the scope of provable <i>"quantum advantage"</i> in learning tasks.
+          </li>
+          <li>
+            <strong>Risk Analysis and Generalization:</strong> I analyze the generalization properties of quantum learning models, with an emphasis on non-monotonic risk behaviors such as the <i>double descent</i> phenomenon at the interpolation threshold. My objective is to derive exact analytical expressions showing how generalization error depends on data geometry (e.g., covariance eigenspectra) and physical quantum circuit architectures.
+          </li>
+        </ul>
+      </section>
 
-      <h2 id="conferences">Conferences & Workshops</h2>
-      <p><strong>QIP 2026:</strong> <i>29th Annual Quantum Information Processing Conference.</i> ATTA Centre in Riga, Latvia.</p>
-      <p><strong>QTML 2025:</strong> <i>9th International Conference on Quantum Techniques in Machine Learning.</i> Marina Bay Sands, Singapore.</p>
-      <p><strong>LMS Research School 2025:</strong> <i>Quantum Machine Learning and Hamiltonian Simulation.</i> Sabhal Mor Ostaig (Gaelic College), Scotland.</p>
-      <p><strong>QTML 2024:</strong> <i>8th International Conference on Quantum Techniques in Machine Learning.</i> University of Melbourne, Australia.</p>
+      <!-- Publications Section -->
+      <section id="publications">
+        <h2>Publications</h2>
+        <ol class="custom-counter">
+          <li>
+            <u>Sabri Meyer</u>, Francesco Scala, Francesco Tacchino, and Aurélien Lucchi. 
+            <i>Gradient scalability and Taylor surrogation of quantum cost landscapes.</i> 
+            <a href="https://journals.aps.org/prresearch/abstract/10.1103/l9bp-dccf" target="_blank" rel="noopener noreferrer">Phys. Rev. Research 8, 023325</a>, 2026.
+          </li>
+        </ol>
+      </section>
 
-      <h2 id="teaching">Teaching</h2>
-      <p><strong>Fall Semester 2025:</strong> <i>Teacher Assistant in Mathematics of Data Science</i></p>
-      <ul>
-        <li>Introduction to probability theory and mathematical statistics</li>
-        <li>Random matrix theory, concentration inequalities, functional calculus and high-dimensional analysis</li>
-        <li>Marchenko–Pastur law, neural networks, distance distributions, and stochastic processes</li>
-      </ul>
-      <p><strong>Fall Semester 2023:</strong> <i>Teacher Assistant in Mathematics of Data Science</i></p>
-      <ul>
-        <li>Introduction to probability theory and mathematical statistics</li>
-        <li>Random matrix theory, concentration inequalities, and dimensionality reduction</li>
-        <li>Graph theory, spectral clustering, and diffusion maps</li>
-      </ul>
+      <!-- Preprints Section -->
+      <section id="preprints">
+        <h2>Preprints</h2>
+        <ol class="custom-counter">
+          <li>
+            <u>Sabri Meyer</u>, Francesco Scala, Francesco Tacchino, and Aurélien Lucchi. 
+            <i>Trainability of Quantum Models Beyond Known Classical Simulability.</i> 
+            arXiv preprint <a href="https://arxiv.org/abs/2507.06344" target="_blank" rel="noopener noreferrer">arXiv:2507.06344</a>, 2025.
+          </li>
+        </ol>
+      </section>
 
-      <h2 id="cv">Curriculum Vitae</h2>
-      <p><strong>2023 - Present:</strong> <i>PhD in Quantum Machine Learning</i>, University of Basel</p>
-      <ul>
-        <li>Electives in Algebraic Geometry</li>
-      </ul>
-      <p><strong>2021 - 2023:</strong> <i>Master of Science in Mathematics</i>, University of Basel</p>
-      <ul>
-        <li>Specialized in Algebraic Number Theory, Analysis of Partial Differential Equations and Stochastic Analysis</li>
-        <li><a href="https://github.com/sabrimeyer/master-thesis" target="_blank">Master Thesis</a> on the Hessian Eigenspectrum of Nonlinear Neural Networks</li>
-        <li>Electives in Theoretical Quantum Mechanics</li>
-      </ul>
-      <p><strong>2018 - 2021:</strong> <i>Bachelor of Science in Mathematics</i>, University of Basel</p>
-      <ul>
-        <li>Electives in Physics & Computer Science</li>
-      </ul>
+      <!-- Conferences & Workshops -->
+      <section id="conferences">
+        <h2>Conferences & Workshops</h2>
+        <p><strong>QIP 2026:</strong> <i>29th Annual Quantum Information Processing Conference.</i> ATTA Centre in Riga, Latvia.</p>
+        <p><strong>QTML 2025:</strong> <i>9th International Conference on Quantum Techniques in Machine Learning.</i> Marina Bay Sands, Singapore.</p>
+        <p><strong>LMS Research School 2025:</strong> <i>Quantum Machine Learning and Hamiltonian Simulation.</i> Sabhal Mòr Ostaig, Scotland.</p>
+        <p><strong>QTML 2024:</strong> <i>8th International Conference on Quantum Techniques in Machine Learning.</i> University of Melbourne, Australia.</p>
+      </section>
+
+      <!-- Teaching -->
+      <section id="teaching">
+        <h2>Teaching</h2>
+        <p><strong>Fall Semester 2023 – Present:</strong> <i>Teaching Assistant in Mathematics of Data Science</i></p>
+        <ul>
+          <li>Introduction to probability theory and mathematical statistics</li>
+          <li>Random matrix theory, concentration inequalities, functional calculus, and high-dimensional analysis</li>
+          <li>Marchenko–Pastur law, neural networks, distance distributions, and stochastic processes</li>
+          <li>Graph theory, spectral clustering, and diffusion maps</li>
+        </ul>
+      </section>
+
+      <!-- Curriculum Vitae -->
+      <section id="cv">
+        <h2>Curriculum Vitae</h2>
+        <p><strong>2023 – Present:</strong> <i>PhD in Quantum Machine Learning</i>, University of Basel</p>
+        <ul>
+          <li>Electives in Algebraic Geometry</li>
+        </ul>
+        <p><strong>2021 – 2023:</strong> <i>Master of Science in Mathematics</i>, University of Basel</p>
+        <ul>
+          <li>Specialized in Algebraic Number Theory, Analysis of Partial Differential Equations, and Stochastic Analysis</li>
+          <li><a href="https://github.com/sabrimeyer/master-thesis" target="_blank" rel="noopener noreferrer">Master Thesis</a> on the Hessian Eigenspectrum of Nonlinear Neural Networks</li>
+          <li>Electives in Theoretical Quantum Mechanics</li>
+        </ul>
+        <p><strong>2018 – 2021:</strong> <i>Bachelor of Science in Mathematics</i>, University of Basel</p>
+        <ul>
+          <li>Electives in Physics & Computer Science</li>
+        </ul>
+      </section>
 
     </main>
   </div>
 </div>
 
-<div class="footer">
+<footer class="footer">
   &copy; 2026 Sabri Meyer
-</div>
+</footer>
+
 <script>
-  // Simple smooth scrolling for internal links
+  // Smooth scrolling for navigation links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
-      });
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
     });
   });
 </script>
+
 </body>
 </html>
