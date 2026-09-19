@@ -7,416 +7,933 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
-    /* 1. Variables and Base Styles */
+    /* ========== CSS Variables — Light Theme ========== */
     :root {
-      --color-primary: #1a1a1a;
-      --color-secondary: #3e7041;
-      --color-accent: #3d423d;
-      --color-text: #2d2d2d;
-      --color-background-light: #f8f9fa;
-      --font-body: 'Open Sans', sans-serif;
-      --font-heading: 'Open Sans', sans-serif;
+      --bg: #F5F3EE;
+      --bg-body: #FAF9F6;
+      --bg-card: #FFFFFF;
+      --bg-sidebar: #EDEAE2;
+      --text: #2C2C2C;
+      --text-secondary: #6B6560;
+      --text-muted: #9A938B;
+      --primary: #5B6B4A;
+      --primary-light: #7A8F68;
+      --primary-glow: rgba(91, 107, 74, 0.15);
+      --accent: #B8A88A;
+      --accent-warm: #C9B99A;
+      --border: #E0DCD4;
+      --shadow: 0 4px 24px rgba(0,0,0,0.06);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.08);
+      --nav-bg: rgba(250, 249, 246, 0.82);
+      --nav-text: #2C2C2C;
+      --hero-gradient: linear-gradient(135deg, #5B6B4A 0%, #7A8F68 30%, #B8A88A 70%, #C9B99A 100%);
+      --radius: 12px;
+      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --cursor-glow: rgba(91, 107, 74, 0.25);
     }
-    
+
+    /* ========== Dark Theme ========== */
+    [data-theme="dark"] {
+      --bg: #0E0E0C;
+      --bg-body: #121210;
+      --bg-card: #1A1A17;
+      --bg-sidebar: #161613;
+      --text: #E8E4DC;
+      --text-secondary: #A8A299;
+      --text-muted: #7A746C;
+      --primary: #8FA87C;
+      --primary-light: #A5C092;
+      --primary-glow: rgba(143, 168, 124, 0.12);
+      --accent: #C4B495;
+      --accent-warm: #D4C4A5;
+      --border: #2A2A26;
+      --shadow: 0 4px 24px rgba(0,0,0,0.2);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,0.3);
+      --nav-bg: rgba(18, 18, 16, 0.85);
+      --nav-text: #E8E4DC;
+      --hero-gradient: linear-gradient(135deg, #4A5B3C 0%, #6B7F58 30%, #9A8B6C 70%, #B0A07A 100%);
+      --cursor-glow: rgba(143, 168, 124, 0.2);
+    }
+
+    /* ========== Reset & Base ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: var(--font-body);
       line-height: 1.7;
-      color: var(--color-text);
-      background-color: #fff;
-      margin: 0;
+      color: var(--text);
+      background-color: var(--bg-body);
+      transition: background-color var(--transition), color var(--transition);
+      overflow-x: hidden;
+      cursor: default;
     }
 
-    /* 2. Layout Structure */
-    .container {
-      max-width: 1140px;
-      margin: 0 auto;
-      padding: 0 20px;
+    /* ========== Reading Progress Bar ========== */
+    .read-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--hero-gradient);
+      z-index: 200;
+      transition: width 0.1s linear;
+      width: 0%;
     }
-    
-    .main-grid {
-      display: flex;
-      gap: 40px;
-      padding-top: 40px;
-    }
-    
+
+    /* ========== Layout ========== */
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+    .main-grid { display: flex; gap: 40px; padding-top: 40px; }
+
+    /* ========== Sidebar ========== */
     .sidebar {
-      flex: 0 0 260px;
-      background-color: var(--color-background-light);
-      padding: 25px 20px;
-      border-radius: 8px;
+      flex: 0 0 300px;
+      background-color: var(--bg-sidebar);
+      padding: 30px 24px;
+      border-radius: var(--radius);
       align-self: flex-start;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-      border: 1px solid #eaeaea;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      position: sticky;
+      top: 90px;
+      transition: background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
     }
 
+    .sidebar-photo-wrap {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-lg);
+    }
     .sidebar-photo {
       width: 100%;
       height: auto;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       display: block;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    
-    .content {
-      flex-grow: 1;
-      padding-bottom: 50px;
+    .sidebar-photo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(91,107,74,0.2) 100%);
+      pointer-events: none;
+      transition: opacity var(--transition);
     }
-
-    /* 3. Typography and Headings */
-    h1, h2, h3 {
-      font-family: var(--font-heading);
-      color: var(--color-primary);
-      margin-top: 0;
-    }
-    
-    h2 {
-      font-size: 2rem;
-      color: var(--color-secondary);
-      margin-top: 45px;
-      margin-bottom: 20px;
-      border-bottom: 2px solid var(--color-accent);
-      padding-bottom: 8px;
-      letter-spacing: 0.5px;
-      scroll-margin-top: 30px;
-    }
-
-    section:first-child h2 {
-      margin-top: 0; /* Remove top spacing on the first section */
-    }
+    .sidebar-photo-wrap:hover .sidebar-photo { transform: scale(1.03); }
 
     .sidebar h3 {
-      font-size: 1.6rem;
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
       font-weight: 700;
-      color: var(--color-primary);
-      margin-bottom: 12px;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 10px;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
-    
+    .sidebar .subtitle {
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+    }
     .sidebar p {
-      margin-bottom: 12px;
-      font-size: 0.92rem;
+      margin-bottom: 10px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
     }
+    .sidebar strong { color: var(--text); }
 
-    /* 4. Navigation */
+    .sidebar dl { margin: 18px 0 0 0; }
+    .sidebar dd { margin: 0; }
+    .sidebar dd a {
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 0;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color var(--transition), padding-left var(--transition);
+    }
+    .sidebar dd a:hover { color: var(--accent); padding-left: 4px; }
+
+    /* ========== Navigation ========== */
     .navbar {
-      background-color: var(--color-primary);
-      padding: 12px 0;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+      background-color: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 10px 0;
       position: sticky;
       top: 0;
       z-index: 100;
+      border-bottom: 1px solid var(--border);
+      transition: background-color var(--transition), border-color var(--transition);
     }
-    
     .nav-list {
       display: flex;
       justify-content: center;
+      align-items: center;
       list-style: none;
       margin: 0;
       padding: 0;
       flex-wrap: wrap;
+      gap: 4px;
     }
-    
     .nav-list li a {
-      color: #fff;
-      padding: 8px 16px;
+      color: var(--nav-text);
+      padding: 8px 14px;
       text-decoration: none;
       display: block;
-      transition: background-color 0.2s ease;
+      transition: all var(--transition);
       font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-size: 0.85rem;
-      border-radius: 4px;
+      font-size: 0.82rem;
+      border-radius: 6px;
+      letter-spacing: 0.3px;
+      position: relative;
     }
-    
-    .nav-list li a:hover {
-      background-color: var(--color-accent);
+    .nav-list li a::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: all var(--transition);
+      transform: translateX(-50%);
+      border-radius: 1px;
     }
-    
-    /* 5. Links and Social Icons */
-    a {
-      color: var(--color-secondary);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-    
-    a:hover {
-      color: var(--color-primary);
-      text-decoration: underline;
-    }
-    
-    .sidebar dl {
-      margin: 15px 0 0 0;
-    }
+    .nav-list li a:hover::after, .nav-list li a.active::after { width: 60%; }
+    .nav-list li a:hover { color: var(--primary); background: var(--primary-glow); }
+    .nav-list li a.active { color: var(--primary); font-weight: 600; }
 
-    .sidebar dd {
-      margin: 0;
-    }
-
-    .sidebar dd a {
-      color: var(--color-secondary);
-      display: flex;
+    /* Theme Toggle */
+    .theme-toggle {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 6px 0;
-      text-decoration: none;
+      justify-content: center;
+      margin-left: 8px;
+      transition: all var(--transition);
       font-size: 0.95rem;
+      flex-shrink: 0;
     }
-    
-    .sidebar dd a:hover {
-      color: var(--color-primary);
-      text-decoration: underline;
+    .theme-toggle:hover { background: var(--primary); color: #fff; border-color: var(--primary); transform: rotate(20deg); }
+
+    /* ========== Content ========== */
+    .content { flex-grow: 1; padding-bottom: 50px; }
+
+    /* ========== Typography ========== */
+    h1, h2, h3 { font-family: var(--font-heading); color: var(--text); margin-top: 0; }
+    h2 {
+      font-size: 1.9rem;
+      color: var(--primary);
+      margin-top: 0;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      letter-spacing: 0.5px;
+      scroll-margin-top: 80px;
+      position: relative;
+      font-weight: 600;
+    }
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--hero-gradient);
+      border-radius: 2px;
+      transition: width var(--transition);
+    }
+    h2:hover::after { width: 120px; }
+
+    /* ========== Sections — Scroll Animations ========== */
+    .section-anim {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .section-anim.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* 6. Content Specific Styling */
-    ol.custom-counter {
-      list-style: none;
-      counter-reset: item;
-      padding-left: 0;
+    section { margin-bottom: 20px; }
+
+    /* ========== Cards ========== */
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
     }
-    
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-light);
+    }
+
+    /* ========== Research Pillars ========== */
+    .research-pillar {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 24px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin: 20px 0;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .research-pillar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--hero-gradient);
+      transform: scaleY(0);
+      transition: transform var(--transition);
+      transform-origin: top;
+    }
+    .research-pillar:hover::before { transform: scaleY(1); }
+    .research-pillar:hover {
+      transform: translateX(6px);
+      box-shadow: var(--shadow);
+    }
+    .pillar-icon {
+      font-size: 1.6rem;
+      color: var(--primary);
+      flex-shrink: 0;
+      width: 40px;
+      text-align: center;
+      transition: transform var(--transition);
+    }
+    .research-pillar:hover .pillar-icon { transform: scale(1.15) rotate(-5deg); }
+    .pillar-text { flex: 1; }
+
+    /* ========== Publications ========== */
+    ol.custom-counter { list-style: none; counter-reset: item; padding-left: 0; }
     ol.custom-counter li {
       counter-increment: item;
       margin-bottom: 1.2em;
       position: relative;
-      padding-left: 2.2em;
+      padding-left: 2.8em;
+      padding: 18px 20px 18px 52px;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      transition: border-color var(--transition);
     }
-    
     ol.custom-counter li::before {
-      content: "[" counter(item) "]";
+      content: counter(item);
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      background: var(--hero-gradient);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    ol.custom-counter li:hover { border-color: var(--primary-light); }
+
+    /* ========== Conferences ========== */
+    .conf-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
+      transition: all var(--transition);
+    }
+    .conf-item:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary-light);
+      box-shadow: var(--shadow);
+    }
+    .conf-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--hero-gradient);
+      flex-shrink: 0;
+    }
+    .conf-text { flex: 1; }
+    .conf-loc { color: var(--text-muted); font-size: 0.88rem; }
+
+    /* ========== Teaching ========== */
+    .teach-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .teach-card::before {
+      content: '\f575';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      font-size: 2rem;
+      color: var(--primary-glow);
+      transition: color var(--transition), transform var(--transition);
+    }
+    .teach-card:hover::before { color: var(--primary); transform: rotate(10deg) scale(1.1); }
+    .teach-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .teach-topics { padding-left: 18px; }
+    .teach-topics li { margin-bottom: 6px; color: var(--text-secondary); }
+
+    /* ========== CV Timeline ========== */
+    .timeline { position: relative; padding-left: 30px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: var(--hero-gradient);
+      border-radius: 1px;
+    }
+    .timeline-item { position: relative; margin-bottom: 28px; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 3px solid var(--primary);
+      transition: transform var(--transition);
+    }
+    .timeline-item:hover::before { transform: scale(1.3); }
+    .timeline-period {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+    .timeline-degree {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 2px 0 6px;
+      color: var(--text);
+    }
+    .timeline-details { color: var(--text-secondary); font-size: 0.9rem; }
+    .timeline-details ul { list-style: none; padding-left: 0; margin-top: 6px; }
+    .timeline-details li { padding-left: 16px; position: relative; margin-bottom: 4px; font-size: 0.88rem; }
+    .timeline-details li::before {
+      content: '›';
       position: absolute;
       left: 0;
+      color: var(--accent);
       font-weight: bold;
-      color: var(--color-secondary);
     }
 
-    ul {
-      list-style: square;
-      padding-left: 20px;
-    }
-    
-    li {
-      margin-bottom: 8px;
-    }
+    /* ========== Links ========== */
+    a { color: var(--primary); text-decoration: none; transition: color var(--transition), letter-spacing var(--transition); }
+    a:hover { color: var(--accent); text-decoration: none; letter-spacing: 0.3px; }
 
-    /* 7. Footer */
+    /* ========== Footer ========== */
     .footer {
       text-align: center;
-      color: #777;
-      font-size: 0.88em;
+      color: var(--text-muted);
+      font-size: 0.85em;
       padding: 30px 0;
-      border-top: 1px solid #eee;
+      border-top: 1px solid var(--border);
       margin-top: 40px;
+      transition: border-color var(--transition), color var(--transition);
     }
-    
-    /* Responsive Adjustments */
+
+    /* ========== Floating Particles ========== */
+    .particle {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    /* ========== Back to top ========== */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--hero-gradient);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
+      z-index: 90;
+      box-shadow: var(--shadow);
+    }
+    .back-to-top.show { opacity: 1; visibility: visible; }
+    .back-to-top:hover { transform: translateY(-3px); }
+
+    /* ========== Responsive ========== */
     @media (max-width: 992px) {
-      .main-grid {
-        flex-direction: column;
-        gap: 20px;
-      }
-      .sidebar {
-        flex: auto;
-        width: 100%;
-        box-sizing: border-box;
-      }
-      .sidebar-photo {
-        max-width: 240px;
-        margin: 0 auto 20px auto;
-      }
-      .nav-list {
-        justify-content: flex-start;
-      }
-      .nav-list li a {
-        padding: 6px 10px;
-        font-size: 0.8rem;
-      }
+      .main-grid { flex-direction: column; gap: 24px; }
+      .sidebar { flex: auto; width: 100%; position: relative; top: 0; }
+      .sidebar-photo { max-width: 240px; margin: 0 auto 16px auto; }
+      .nav-list { justify-content: flex-start; }
+      .nav-list li a { padding: 6px 10px; font-size: 0.78rem; }
+      .cursor-glow { display: none; }
+      .research-pillar { flex-direction: column; }
+      .timeline { padding-left: 24px; }
+      .timeline::before { left: 5px; }
+      .timeline-item::before { left: -20px; }
     }
-  </style>
+
+    @media (max-width: 600px) {
+      h2 { font-size: 1.5rem; }
+      .nav-list li a { padding: 5px 8px; font-size: 0.72rem; }
+    }
+
+    /* ========== Selection ========== */
+    ::selection {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* ========== Scrollbar ========== */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; opacity: 0.3; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--primary-light); }
+
+    /* ========== Focus ========== */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    /* ========== Animation: heading letter reveal ========== */
+    .letter-reveal { display: inline-block; overflow: hidden; }
+    .letter-reveal span {
+      display: inline-block;
+      animation: letterUp 0.6s ease forwards;
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    @keyframes letterUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========== Subtle grid pattern background ========== */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.03;
+      background-image:
+        linear-gradient(var(--text) 1px, transparent 1px),
+        linear-gradient(90deg, var(--text) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      transition: opacity var(--transition);
+    }
+  
+/* ========== Vertical Matrix Layers ========== */
+.matrix-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; font-family: 'Courier New', monospace; white-space: pre; user-select: none; }
+.matrix-col { position: absolute; top: -1em; width: 1.3em; white-space: pre; line-height: 1.05; font-family: 'Courier New', monospace; }
+</style>
 </head>
-<body>
+<body data-theme="light">
 
-<header class="navbar">
+  <div class="grid-bg"></div>
+  <div id="matrixBack" class="matrix-layer" style="z-index:-1;"></div>
+<div id="matrixMid" class="matrix-layer" style="z-index:-1;"></div>
+<div id="matrixFront" class="matrix-layer" style="z-index:-1;"></div>
+  <div class="read-progress" id="readProgress"></div>
+
+  <header class="navbar">
+    <div class="container">
+      <nav>
+        <ul class="nav-list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#preprints">Preprints</a></li>
+          <li><a href="#conferences">Conferences</a></li>
+          <li><a href="#teaching">Teaching</a></li>
+          <li><a href="#cv">CV</a></li>
+          <li><button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode" aria-label="Toggle dark/light mode">
+            <i class="fa-solid fa-moon"></i>
+          </button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
   <div class="container">
-    <nav>
-      <ul class="nav-list">
-        <li><a href="#about">About</a></li>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#publications">Publications</a></li>
-        <li><a href="#preprints">Preprints</a></li>
-        <li><a href="#conferences">Conferences</a></li>
-        <li><a href="#teaching">Teaching</a></li>
-        <li><a href="#cv">CV</a></li> 
-      </ul>
-    </nav>
+    <div class="main-grid">
+
+      <!-- Sidebar -->
+      <aside class="sidebar section-anim">
+        <div class="sidebar-photo-wrap">
+          <img class="sidebar-photo" src="photo.gif" alt="Sabri Meyer Profile Photo">
+        </div>
+
+        <h3>Sabri Meyer</h3>
+        <p class="subtitle">MSc in Mathematics · PhD Candidate</p>
+        
+        <p><strong>Doctoral Researcher in Quantum Machine Learning</strong></p>
+        
+        <p><a href="mailto:sabri.meyer@unibas.ch"><i class="fa-solid fa-envelope"></i> sabri.meyer@unibas.ch</a></p>
+        
+        <p><strong>Affiliation</strong><br>
+        Department of Mathematics and Computer Science<br>
+        University of Basel</p>
+        
+        <p><strong>Office</strong><br>
+        Spiegelgasse 1<br>
+        4051 Basel, Switzerland</p>
+
+        <dl>
+          <dd><a href="https://scholar.google.com/citations?user=Y4PaSKwAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-google-scholar"></i> Google Scholar</a></dd>
+          <dd><a href="https://github.com/sabrimeyer" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a></dd>
+          <dd><a href="https://www.linkedin.com/in/sabri-meyer-69865b33b/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></dd> 
+          <dd><a href="https://www.youtube.com/@sabrimeyer4424" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> YouTube</a></dd>
+        </dl>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="content">
+
+        <!-- About Section -->
+        <section id="about" class="section-anim">
+          <h2>About Me</h2>
+
+          <div class="card">
+            <p>
+              I am a PhD researcher in <strong>Quantum Machine Learning (QML)</strong> at the University of Basel, working within the 
+              <a href="https://sites.google.com/view/omls-group" target="_blank" rel="noopener noreferrer">Optimization of Machine Learning Systems Group</a>. 
+              My research is supported by the 
+              <a href="https://data.snf.ch/grants/grant/214919" target="_blank" rel="noopener noreferrer">SNSF</a> 
+              and conducted in collaboration with 
+              <a href="https://www.zurich.ibm.com/" target="_blank" rel="noopener noreferrer">IBM Research Zürich</a>.
+            </p>
+          </div>
+
+          <div class="card">
+            <p>
+              Driven by a passion for mathematics, physics, and computer science, my goal is to leverage abstract mathematical frameworks to solve complex, real-world problems. My interest in computation originated from an early curiosity about how software simulates reality, from digital physics in movies to video game mechanics and design.
+            </p>
+          </div>
+
+          <div class="card">
+            <p>
+              Outside of research, I produce music across various genres and styles. You can explore some of my creations on 
+              <a href="https://www.youtube.com/@sabrimeyer4424" target="_blank" rel="noopener noreferrer">YouTube</a>.
+            </p>
+          </div>
+        </section>
+
+        <!-- Research Section -->
+        <section id="research" class="section-anim">
+          <h2>Research</h2>
+          <p>
+            My research lies at the intersection of mathematics, theoretical computer science, and physics, focusing on the rigorous mathematical foundations of Quantum Machine Learning (QML). I leverage theoretical tools from high-dimensional probability, mathematical optimization, statistical learning theory, and computational complexity to investigate three main pillars:
+          </p>
+
+          <div class="research-pillar">
+            <div class="pillar-icon"><i class="fa-solid fa-mountain"></i></div>
+            <div class="pillar-text">
+              <strong>Optimization Landscapes and Trainability:</strong> A fundamental barrier in training variational quantum algorithms is the <i>barren plateau</i> phenomenon, where cost function gradients vanish exponentially with system size. While mitigation strategies can improve gradient scaling, they frequently force quantum models into regimes that are classically simulable. My research includes mathematically characterizing this trainability–simulability trade-off.
+            </div>
+          </div>
+
+          <div class="research-pillar">
+            <div class="pillar-icon"><i class="fa-solid fa-vector-square"></i></div>
+            <div class="pillar-text">
+              <strong>Boundaries of Classical Simulation:</strong> Beyond developing algorithms for simulating quantum circuits, I also explore the exact computational boundaries separating classical simulability from non-classical quantum hardness. A key theoretical conjecture guiding this work is whether eliminating barren plateaus fundamentally implies classical simulability, thereby constraining the scope of provable <i>"quantum advantage"</i> in learning tasks.
+            </div>
+          </div>
+
+          <div class="research-pillar">
+            <div class="pillar-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="pillar-text">
+              <strong>Risk Analysis and Generalization:</strong> I analyze the generalization properties of quantum learning models, with an emphasis on non-monotonic risk behaviors such as the <i>double descent</i> phenomenon at the interpolation threshold. My objective is to derive exact analytical expressions showing how generalization error depends on data geometry (e.g., covariance eigenspectra) and physical quantum circuit architectures.
+            </div>
+          </div>
+        </section>
+
+        <!-- Publications Section -->
+        <section id="publications" class="section-anim">
+          <h2>Publications</h2>
+          <ol class="custom-counter">
+            <li>
+              <u>Sabri Meyer</u>, Francesco Scala, Francesco Tacchino, and Aurélien Lucchi. 
+              <i>Gradient scalability and Taylor surrogation of quantum cost landscapes.</i> 
+              <a href="https://journals.aps.org/prresearch/abstract/10.1103/l9bp-dccf" target="_blank" rel="noopener noreferrer">Phys. Rev. Research 8, 023325</a>, 2026.
+            </li>
+          </ol>
+        </section>
+
+        <!-- Preprints Section -->
+        <section id="preprints" class="section-anim">
+          <h2>Preprints</h2>
+          <ol class="custom-counter">
+            <li>
+              <u>Sabri Meyer</u>, Francesco Scala, Francesco Tacchino, and Aurélien Lucchi. 
+              <i>Trainability of Quantum Models Beyond Known Classical Simulability.</i> 
+              arXiv preprint <a href="https://arxiv.org/abs/2507.06344" target="_blank" rel="noopener noreferrer">arXiv:2507.06344</a>, 2025.
+            </li>
+          </ol>
+        </section>
+
+        <!-- Conferences & Workshops -->
+        <section id="conferences" class="section-anim">
+          <h2>Conferences & Workshops</h2>
+          
+          <div class="conf-item">
+            <div class="conf-dot"></div>
+            <div class="conf-text">
+              <strong>QIP 2026</strong> — <i>29th Annual Quantum Information Processing Conference</i>
+              <div class="conf-loc">ATTA Centre, Riga, Latvia</div>
+            </div>
+          </div>
+
+          <div class="conf-item">
+            <div class="conf-dot"></div>
+            <div class="conf-text">
+              <strong>QTML 2025</strong> — <i>9th International Conference on Quantum Techniques in Machine Learning</i>
+              <div class="conf-loc">Marina Bay Sands, Singapore</div>
+            </div>
+          </div>
+
+          <div class="conf-item">
+            <div class="conf-dot"></div>
+            <div class="conf-text">
+              <strong>LMS Research School 2025</strong> — <i>Quantum Machine Learning and Hamiltonian Simulation</i>
+              <div class="conf-loc">Sabhal Mòr Ostaig, Scotland</div>
+            </div>
+          </div>
+
+          <div class="conf-item">
+            <div class="conf-dot"></div>
+            <div class="conf-text">
+              <strong>QTML 2024</strong> — <i>8th International Conference on Quantum Techniques in Machine Learning</i>
+              <div class="conf-loc">University of Melbourne, Australia</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Teaching -->
+        <section id="teaching" class="section-anim">
+          <h2>Teaching</h2>
+          <div class="teach-card">
+            <p><strong>Fall Semester 2023 – Present:</strong> <i>Teaching Assistant in Mathematics of Data Science</i></p>
+            <ul class="teach-topics">
+              <li>Introduction to probability theory and mathematical statistics</li>
+              <li>Random matrix theory, concentration inequalities, functional calculus, and high-dimensional analysis</li>
+              <li>Marchenko–Pastur law, neural networks, distance distributions, and stochastic processes</li>
+              <li>Graph theory, spectral clustering, and diffusion maps</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Curriculum Vitae -->
+        <section id="cv" class="section-anim">
+          <h2>Curriculum Vitae</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-period">2023 – Present</div>
+              <div class="timeline-degree">PhD in Quantum Machine Learning</div>
+              <div class="timeline-details">
+                University of Basel
+                <ul>
+                  <li>Electives in Algebraic Geometry</li>
+                </ul>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-period">2021 – 2023</div>
+              <div class="timeline-degree">Master of Science in Mathematics</div>
+              <div class="timeline-details">
+                University of Basel
+                <ul>
+                  <li>Specialized in Algebraic Number Theory, Analysis of PDEs, and Stochastic Analysis</li>
+                  <li><a href="https://github.com/sabrimeyer/master-thesis" target="_blank" rel="noopener noreferrer">Master Thesis</a> on the Hessian Eigenspectrum of Nonlinear Neural Networks</li>
+                  <li>Electives in Theoretical Quantum Mechanics</li>
+                </ul>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-period">2018 – 2021</div>
+              <div class="timeline-degree">Bachelor of Science in Mathematics</div>
+              <div class="timeline-details">
+                University of Basel
+                <ul>
+                  <li>Electives in Physics & Computer Science</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
   </div>
-</header>
 
-<div class="container">
-  <div class="main-grid">
+  <footer class="footer">
+    &copy; 2026 Sabri Meyer
+  </footer>
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <img class="sidebar-photo" src="photo.gif" alt="Sabri Meyer Profile Photo">
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
 
-      <h3>SABRI MEYER</h3>
-      <p><strong>MSc in Mathematics</strong></p>
-      <p>Doctoral Researcher in QML</p>
-      
-      <p><a href="mailto:sabri.meyer@unibas.ch"><i class="fa-solid fa-envelope"></i> sabri.meyer@unibas.ch</a></p>
-      
-      <p><strong>Affiliation</strong><br>
-      Department of Mathematics and Computer Science<br>
-      University of Basel</p>
-      
-      <p><strong>Office</strong><br>
-      Spiegelgasse 1<br>
-      4051 Basel, Switzerland</p>
-
-      <dl>
-        <dd><a href="https://scholar.google.com/citations?user=Y4PaSKwAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-google-scholar"></i> Google Scholar</a></dd>
-        <dd><a href="https://github.com/sabrimeyer" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a></dd>
-        <dd><a href="https://www.linkedin.com/in/sabri-meyer-69865b33b/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></dd> 
-        <dd><a href="https://www.youtube.com/@sabrimeyer4424" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> YouTube</a></dd>
-      </dl>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="content">
-
-      <!-- About Section -->
-      <section id="about">
-        <h2>About Me</h2>
-
-        <p>
-          I am a PhD researcher in <strong>Quantum Machine Learning (QML)</strong> at the University of Basel, working within the 
-          <a href="https://sites.google.com/view/omls-group" target="_blank" rel="noopener noreferrer">Optimization of Machine Learning Systems Group</a>. 
-          My research is supported by the 
-          <a href="https://data.snf.ch/grants/grant/214919" target="_blank" rel="noopener noreferrer">SNSF</a> 
-          and conducted in collaboration with 
-          <a href="https://www.zurich.ibm.com/" target="_blank" rel="noopener noreferrer">IBM Research Zürich</a>.
-        </p>
-
-        <p>
-          Driven by a passion for mathematics, physics, and computer science, my goal is to leverage abstract mathematical frameworks to solve complex, real-world problems. My interest in computation originated from an early curiosity about how software simulates reality, from digital physics in movies to video game mechanics and design.
-        </p>
-
-        <p>
-          Outside of research, I produce music across various genres and styles. You can explore some of my creations on 
-          <a href="https://www.youtube.com/@sabrimeyer4424" target="_blank" rel="noopener noreferrer">YouTube</a>.
-        </p>
-      </section>
-
-      <!-- Research Section -->
-      <section id="research">
-        <h2>Research</h2>
-        <p>
-          My research lies at the intersection of mathematics, theoretical computer science, and physics, focusing on the rigorous mathematical foundations of Quantum Machine Learning (QML). I leverage theoretical tools from high-dimensional probability, mathematical optimization, statistical learning theory, and computational complexity to investigate three main pillars:
-        </p>
-        <ul>
-          <li>
-            <strong>Optimization Landscapes and Trainability:</strong> A fundamental barrier in training variational quantum algorithms is the <i>barren plateau</i> phenomenon, where cost function gradients vanish exponentially with system size. While mitigation strategies can improve gradient scaling, they frequently force quantum models into regimes that are classically simulable. My research includes mathematically characterizing this trainability–simulability trade-off.
-          </li>
-          <li>
-            <strong>Boundaries of Classical Simulation:</strong> Beyond developing algorithms for simulating quantum circuits, I also explore the exact computational boundaries separating classical simulability from non-classical quantum hardness. A key theoretical conjecture guiding this work is whether eliminating barren plateaus fundamentally implies classical simulability, thereby constraining the scope of provable <i>"quantum advantage"</i> in learning tasks.
-          </li>
-          <li>
-            <strong>Risk Analysis and Generalization:</strong> I analyze the generalization properties of quantum learning models, with an emphasis on non-monotonic risk behaviors such as the <i>double descent</i> phenomenon at the interpolation threshold. My objective is to derive exact analytical expressions showing how generalization error depends on data geometry (e.g., covariance eigenspectra) and physical quantum circuit architectures.
-          </li>
-        </ul>
-      </section>
-
-      <!-- Publications Section -->
-      <section id="publications">
-        <h2>Publications</h2>
-        <ol class="custom-counter">
-          <li>
-            <u>Sabri Meyer</u>, Francesco Scala, Francesco Tacchino, and Aurélien Lucchi. 
-            <i>Gradient scalability and Taylor surrogation of quantum cost landscapes.</i> 
-            <a href="https://journals.aps.org/prresearch/abstract/10.1103/l9bp-dccf" target="_blank" rel="noopener noreferrer">Phys. Rev. Research 8, 023325</a>, 2026.
-          </li>
-        </ol>
-      </section>
-
-      <!-- Preprints Section -->
-      <section id="preprints">
-        <h2>Preprints</h2>
-        <ol class="custom-counter">
-          <li>
-            <u>Sabri Meyer</u>, Francesco Scala, Francesco Tacchino, and Aurélien Lucchi. 
-            <i>Trainability of Quantum Models Beyond Known Classical Simulability.</i> 
-            arXiv preprint <a href="https://arxiv.org/abs/2507.06344" target="_blank" rel="noopener noreferrer">arXiv:2507.06344</a>, 2025.
-          </li>
-        </ol>
-      </section>
-
-      <!-- Conferences & Workshops -->
-      <section id="conferences">
-        <h2>Conferences & Workshops</h2>
-        <p><strong>QIP 2026:</strong> <i>29th Annual Quantum Information Processing Conference.</i> ATTA Centre in Riga, Latvia.</p>
-        <p><strong>QTML 2025:</strong> <i>9th International Conference on Quantum Techniques in Machine Learning.</i> Marina Bay Sands, Singapore.</p>
-        <p><strong>LMS Research School 2025:</strong> <i>Quantum Machine Learning and Hamiltonian Simulation.</i> Sabhal Mòr Ostaig, Scotland.</p>
-        <p><strong>QTML 2024:</strong> <i>8th International Conference on Quantum Techniques in Machine Learning.</i> University of Melbourne, Australia.</p>
-      </section>
-
-      <!-- Teaching -->
-      <section id="teaching">
-        <h2>Teaching</h2>
-        <p><strong>Fall Semester 2023 – Present:</strong> <i>Teaching Assistant in Mathematics of Data Science</i></p>
-        <ul>
-          <li>Introduction to probability theory and mathematical statistics</li>
-          <li>Random matrix theory, concentration inequalities, functional calculus, and high-dimensional analysis</li>
-          <li>Marchenko–Pastur law, neural networks, distance distributions, and stochastic processes</li>
-          <li>Graph theory, spectral clustering, and diffusion maps</li>
-        </ul>
-      </section>
-
-      <!-- Curriculum Vitae -->
-      <section id="cv">
-        <h2>Curriculum Vitae</h2>
-        <p><strong>2023 – Present:</strong> <i>PhD in Quantum Machine Learning</i>, University of Basel</p>
-        <ul>
-          <li>Electives in Algebraic Geometry</li>
-        </ul>
-        <p><strong>2021 – 2023:</strong> <i>Master of Science in Mathematics</i>, University of Basel</p>
-        <ul>
-          <li>Specialized in Algebraic Number Theory, Analysis of Partial Differential Equations, and Stochastic Analysis</li>
-          <li><a href="https://github.com/sabrimeyer/master-thesis" target="_blank" rel="noopener noreferrer">Master Thesis</a> on the Hessian Eigenspectrum of Nonlinear Neural Networks</li>
-          <li>Electives in Theoretical Quantum Mechanics</li>
-        </ul>
-        <p><strong>2018 – 2021:</strong> <i>Bachelor of Science in Mathematics</i>, University of Basel</p>
-        <ul>
-          <li>Electives in Physics & Computer Science</li>
-        </ul>
-      </section>
-
-    </main>
-  </div>
-</div>
-
-<footer class="footer">
-  &copy; 2026 Sabri Meyer
-</footer>
-
-<script>
-  // Smooth scrolling for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
+  <script>
+const pool = [
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'e', 'i', 'π', 'ϕ', 'φ', 'γ', '∞', 'ℏ', 'c', 'k', 'G',
+    '{', '}', '[', ']', '(', ')', '⟨', '⟩', '|', '‖', '⌊', '⌋', '⌈', '⌉',
+    'α', 'β', 'γ', 'δ', 'ε', 'ζ', 'η', 'θ', 'ι', 'κ', 'λ', 'μ', 'ν', 'ξ', 'o', 'π', 'ρ', 'σ', 'τ', 'υ', 'χ', 'ψ', 'ω',
+    'Γ', 'Δ', 'Θ', 'Λ', 'Ξ', 'Π', 'Σ', 'Υ', 'Φ', 'Ψ', 'Ω',
+    '∂', '∫', '∬', '∭', '∮', '∯', '∰', '∑', '∏', '∐', '∇', 'd', 'dx', 'dy', 'dz', 'dt', '∂x', '∂y', '∂z', '∂t', 'lim', 'sup', 'inf',
+    '†', '‡', '↯', 'Tr', 'det', 'diag', 'ker', 'im', 'sgn',
+    '∈', '∉', '∋', '∌', '⊂', '⊃', '⊆', '⊇', '⊄', '⊈', '∪', '∩', '∖', '∆', '∅', 'ℵ', 'ℶ', '∀', '∃', '∄', '¬', '∧', '∨', '⊤', '⊥', '⊢', '⊨', '⊩', '⊪',
+    '⇒', '⇔', '↦', '↤', '⟼', 'Θ', 'Ο', 'O', 'Ω', 'ω',
+    'ℕ', 'ℤ', 'ℚ', 'ℝ', 'ℂ', 'ℍ', '𝔽', 'ℙ',
+    '+', '-', '±', '∓', '×', '÷', '·', '*', '/', '∘', '•', '⋆', '⊗', '⊕', '⊖', '⊘', '⊙', '⊛', '⊜', '⊞', '⊟', '⋁', '⋀', '⋃', '⋂', '⋉', '⋊', '⋈',
+    '=', '≠', '<', '>', '≤', '≥', '≪', '≫', '≈', '≡', '≅', '≃', '≂', '∝', '∼', '≟', ':=', '∴', '∵', '⊏', '⊐', '⊑', '⊒',
+    '→', '←', '↑', '↓', '↔', '↕', '⇄', '⇆', '⇉', '⇇', '⇈', '⇊', '⇍', '⇏', '⇎', '⟹', '⟺', '⟸', '↗', '↘', '↖', '↙', '⤷', '⤶', '⟿',
+    '∠', '∟', '°', '△', '□', '◊', '℘', 'ℓ'
+];
+function createLayer(id, count, minSize, maxSize, minOp, maxOp, speedBase, speedRange) {
+  const el = document.getElementById(id);
+  el.innerHTML = '';
+  const colsPerRow = Math.ceil(Math.sqrt(count));
+  for(let i=0;i<count;i++){
+    const col = document.createElement('div');
+    col.className = 'matrix-col';
+    // Even spread with jitter so no clustering / empty zones
+    const slot = i / count;
+    const baseLeft = (slot * 100) + 2; // spread across full width
+    const jitter = (Math.random() - 0.5) * 8; // small random spread
+    col.style.left = Math.max(0, Math.min(100, baseLeft + jitter)) + 'vw';
+    col.style.fontSize = (minSize + Math.random()*(maxSize-minSize)) + 'px';
+    col.style.color = '#2a5c12';
+    col.style.textShadow = '0 0 3px rgba(42,92,18,0.8)';
+    // Build vertical line with per-symbol random opacity and scrambling
+    const len = 8 + Math.floor(Math.random()*40);
+    let html = '';
+    for(let k=0;k<len;k++){
+      const sym = pool[Math.floor(Math.random()*pool.length)];
+      const op = (minOp + Math.random()*(maxOp-minOp)).toFixed(2);
+      html += '<span style="opacity:'+op+'; color:rgba(42,92,18,'+op+');">' + sym + '</span>\n';
+    }
+    col.innerHTML = html;
+    // Start above header (-10vh) and scroll down past footer (up to ~110vh)
+    let y = Math.random()*120 - 20; // spread across screen for continuous flow
+    const spd = speedBase + Math.random()*speedRange;
+    (function animate(){
+      y += spd*0.12;
+      // Fade out gradually past footer, and restore opacity on loop-back
+      if(y > 95) { col.style.opacity = Math.max(0, 1 - (y - 95)/25); }
+      else { col.style.opacity = 1; }
+      if(y > 120) { y = -(Math.random()*35 + 5); col.style.opacity = 1; } // loop back staggered, restore visibility
+      col.style.top = y + 'vh';
+      // Dynamic scramble: faster, multiple symbols per event
+      if(Math.random() < 0.45){
+        const spans = col.querySelectorAll('span');
+        if(spans.length > 0) {
+          const count = 2 + Math.floor(Math.random()*4);
+          for(let s=0; s<count; s++){
+            const idx = Math.floor(Math.random()*spans.length);
+            const sym = pool[Math.floor(Math.random()*pool.length)];
+            spans[idx].textContent = sym;
+            const op = (minOp + Math.random()*(maxOp-minOp)).toFixed(2);
+            spans[idx].style.opacity = op;
+            spans[idx].style.color = 'rgba(42,92,18,'+op+')';
+          }
+        }
       }
-    });
+      requestAnimationFrame(animate);
+    })();
+    el.appendChild(col);
+  }
+}
+function initMatrix() {
+  if(document.body.getAttribute('data-theme')==='dark'){
+    createLayer('matrixBack', 14, 8, 10, 0.3, 0.5, 0.3, 0.4);
+    createLayer('matrixMid', 20, 9, 11, 0.45, 0.7, 0.6, 0.8);
+    createLayer('matrixFront', 28, 10, 14, 0.7, 0.95, 1.0, 1.2);
+  }
+}
+function clearMatrix() {
+  ['matrixBack','matrixMid','matrixFront'].forEach(id => {
+    const el = document.getElementById(id); if(el) el.innerHTML = '';
   });
+}
+initMatrix();
+// Theme toggle
+const themeBtn = document.getElementById('themeToggle');
+if(themeBtn) {
+  themeBtn.addEventListener('click', () => {
+    const body = document.body;
+    const isDark = body.getAttribute('data-theme') === 'dark';
+    body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    if(body.getAttribute('data-theme') === 'dark') initMatrix(); else clearMatrix();
+  });
+}
 </script>
-
 </body>
 </html>
